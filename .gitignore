@@ -31,6 +31,3 @@ Thumbs.db
 
 # Testing
 coverage/
-
-# Vite
-vite.svg
