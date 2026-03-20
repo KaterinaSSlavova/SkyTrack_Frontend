@@ -1,0 +1,22 @@
+stages:
+  - build
+  - test
+  - sonarqube-check
+
+before_script:
+  - npm ci
+
+build:
+  stage: build
+  script:
+    - npm run build
+
+test:
+  stage: test
+  script:
+    - npm test
+
+sonarqube-check:
+  stage: sonarqube-check
+  script:
+    - echo "fe"
