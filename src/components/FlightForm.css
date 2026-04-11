@@ -1,0 +1,63 @@
+.flight-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.flight-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #cbd5e1;
+    border-radius: 14px;
+    background: #ffffff;
+    color: #1e293b;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flight-input:focus {
+    outline: none;
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.12);
+}
+
+.flight-input::placeholder {
+    color: #94a3b8;
+}
+
+.flight-form-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.flight-button,
+.flight-cancel-button {
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.flight-button {
+    border: none;
+    background: #1d4ed8;
+    color: white;
+}
+
+.flight-button:hover {
+    background: #1e40af;
+}
+
+.flight-cancel-button {
+    border: 1px solid #cbd5e1;
+    background: #ffffff;
+    color: #334155;
+}
+
+.flight-cancel-button:hover {
+    background: #f8fafc;
+}

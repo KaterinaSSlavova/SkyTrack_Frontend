@@ -1,0 +1,45 @@
+.flight-form-layout {
+    min-height: 100vh;
+    background: #f3f5f7;
+    display: flex;
+}
+
+.flight-form-container {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 48px 24px;
+    box-sizing: border-box;
+}
+
+.flight-form-card {
+    width: 100%;
+    max-width: 760px;
+    background: #ffffff;
+    border: 1px solid #d9dee7;
+    border-radius: 24px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.flight-form-header {
+    margin-bottom: 28px;
+    text-align: left;
+}
+
+.flight-form-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+.flight-form-subtitle {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 18px;
+    color: #64748b;
+}
