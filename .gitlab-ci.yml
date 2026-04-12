@@ -22,7 +22,7 @@ build:
 deploy:
   stage: deploy
   script:
-    - docker build -t skytrack-frontend:latest .
+    - docker build --build-arg VITE_SUPABASE_URL="$VITE_SUPABASE_URL" --build-arg VITE_SUPABASE_ANON_KEY="$VITE_SUPABASE_ANON_KEY" -t skytrack-frontend:latest .
     - docker stop skytrack-frontend || true
     - docker rm skytrack-frontend || true
     - docker run -d --name skytrack-frontend --restart unless-stopped -p 3000:80 skytrack-frontend:latest
