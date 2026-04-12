@@ -48,7 +48,7 @@ export default function RegisterForm() {
         if (!file) return;
 
         const fileExt = file.name.split(".").pop();
-        const fileName = `${crypto.randomUUID()}.${fileExt}`;
+        const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${fileExt}`;
         const filePath = `profiles/${fileName}`;
 
         const { error } = await supabase.storage
