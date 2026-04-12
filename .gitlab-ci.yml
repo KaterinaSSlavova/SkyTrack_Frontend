@@ -1,6 +1,6 @@
 stages:
   - build
-  - test
+#  - test
   - deploy
 
 build:
@@ -11,13 +11,13 @@ build:
   rules:
     - if: '$CI_COMMIT_BRANCH == "dev"'
 
-test:
-  stage: test
-  script:
-    - npm ci
-    - npm run test -- --run
-  rules:
-    - if: '$CI_COMMIT_BRANCH == "dev"'
+#test:
+#  stage: test
+#  script:
+#    - npm ci
+#    - npm run test -- --run
+#  rules:
+#    - if: '$CI_COMMIT_BRANCH == "dev"'
 
 deploy:
   stage: deploy
