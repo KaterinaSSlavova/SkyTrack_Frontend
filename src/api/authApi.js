@@ -1,13 +1,13 @@
 import axios from "axios";
 
-const url = "http://localhost:8080/auth";
+const url = "/auth";
 
 export async function login(data){
-   const response = await axios.post(`${url}/login`, data);
+   const response = await api.post(`${url}/login`, data);
    return response.data;
 }
 
 export async function register(data){
-    const response = await axios.post(`${url}/register`, data);
+    const response = await api.post(`${url}/register`, data);
     return response.data;
 }
