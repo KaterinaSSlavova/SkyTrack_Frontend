@@ -1,10 +1,33 @@
 stages:
-  - build
+  - test
+  - docker
+  - deploy
 
-before_script:
-  - npm ci
+variables:
+  IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
 
-build:
-  stage: build
+test:
+  stage: test
   script:
+    - npm ci
     - npm run build
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "dev"'
+
+docker-build-push:
+  stage: docker
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker build -t "$IMAGE_TAG" .
+    - docker push "$IMAGE_TAG"
+  rules:
+    - if: '$ICT_COMMIT_BRANCH == "dev"'
+
+deploy:
+  stage: deploy
+  script:
+    - cd opt/skytrack
+    - docker compose pull frontend
+    - docker compose up -d frontend
+  rules:
+    - if: '$ICT_COMMIT_BRANCH == "dev"'
