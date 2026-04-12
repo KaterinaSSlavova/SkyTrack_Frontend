@@ -21,7 +21,7 @@ docker-build-push:
     - docker build -t "$IMAGE_TAG" .
     - docker push "$IMAGE_TAG"
   rules:
-    - if: '$ICT_COMMIT_BRANCH == "dev"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
 
 deploy:
   stage: deploy
@@ -30,4 +30,4 @@ deploy:
     - docker compose pull frontend
     - docker compose up -d frontend
   rules:
-    - if: '$ICT_COMMIT_BRANCH == "dev"'
+    - if: '$CI_COMMIT_BRANCH == "dev"'
