@@ -77,6 +77,19 @@
     width: 100%;
 }
 
+.search-date-input {
+    height: 58px;
+    border: 1px solid #cfd8e3;
+    border-radius: 16px;
+    font-size: 18px;
+    color: #1f2937;
+    background-color: #ffffff;
+    outline: none;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 18px;
+}
+
 .search-input:focus {
     border-color: #1d4f91;
 }

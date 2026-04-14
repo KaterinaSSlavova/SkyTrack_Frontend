@@ -72,6 +72,8 @@ export default function FlightSearchForm({
                     className="search-input"
                     value={departureDate}
                     onChange={(e) => onDepartureDateChange(e.target.value)}
+                    min={new Date().toISOString().split("T")[0]}
+                    onClick={(e) => e.target.showPicker()}
                 />
             </div>
 

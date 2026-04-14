@@ -140,6 +140,7 @@ export default function RegisterForm() {
                     )}
                 </div>
 
+
                 <div className="registration-field">
                     <label>Birthdate</label>
                     <input
@@ -147,6 +148,8 @@ export default function RegisterForm() {
                         type="date"
                         value={formData.birthDate}
                         onChange={handleChange}
+                        onClick={(e) => e.target.showPicker()}
+                        max={new Date().toISOString().split("T")[0]}
                         className={fieldErrors.birthDate ? "registration-input-error" : ""}
                     />
                     {fieldErrors.birthDate && (
