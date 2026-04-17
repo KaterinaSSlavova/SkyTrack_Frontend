@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/authApi";
+import { getLoggedUser } from "../api/userApi";
 import { useFormErrors } from "../components/useFormErrors";
+import { useUser } from "../context/UserContext";
 import "./LoginForm.css";
 
 export default function LoginForm() {
@@ -11,13 +13,20 @@ export default function LoginForm() {
     });
 
     const navigate = useNavigate();
+    const { setUser } = useUser();
 
-    const {generalError,fieldErrors,clearErrors,clearFieldError,handleApiError} = useFormErrors();
+    const {
+        generalError,
+        fieldErrors,
+        clearErrors,
+        clearFieldError,
+        handleApiError
+    } = useFormErrors();
 
     function handleChange(e) {
         const { name, value } = e.target;
 
-        setFormData(prev => ({
+        setFormData((prev) => ({
             ...prev,
             [name]: value
         }));
@@ -34,21 +43,18 @@ export default function LoginForm() {
             const response = await login(formData);
 
             localStorage.setItem("token", response.token);
-            localStorage.setItem(
-                "user",
-                JSON.stringify({
-                    id: response.id,
-                    firstName: response.firstName,
-                    role: response.role
-                })
-            );
+
+            const fullUser = await getLoggedUser();
+
+            setUser(fullUser);
+            localStorage.setItem("user", JSON.stringify(fullUser));
 
             setFormData({
                 email: "",
                 password: ""
             });
 
-            if (response.role === "ADMIN") {
+            if (fullUser.role === "ADMIN") {
                 navigate("/airports");
             } else {
                 navigate("/passenger");

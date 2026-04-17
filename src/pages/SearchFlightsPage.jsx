@@ -5,8 +5,12 @@ import { searchAirports } from "../api/airportApi";
 import FlightSearchForm from "../components/FlightSearchForm";
 import FlightSearchResult from "../components/FlightSearchResult";
 import "./SearchFlightsPage.css";
+import Topbar from "../components/Topbar";
+import { useNavigate } from "react-router-dom";
 
 export default function SearchFlightsPage() {
+    const navigate = useNavigate();
+
     const [departureInput, setDepartureInput] = useState("");
     const [arrivalInput, setArrivalInput] = useState("");
     const [departureDate, setDepartureDate] = useState("");
@@ -74,10 +78,6 @@ export default function SearchFlightsPage() {
         setError("");
         setHasSearched(true);
 
-        console.log("selectedDepartureAirport:", selectedDepartureAirport);
-        console.log("selectedArrivalAirport:", selectedArrivalAirport);
-        console.log("departureDate:", departureDate);
-
         if (!selectedDepartureAirport || !selectedArrivalAirport || !departureDate) {
             setError("Please fill all fields.");
             setFlights([]);
@@ -95,6 +95,7 @@ export default function SearchFlightsPage() {
 
             setFlights(response);
         } catch (err) {
+            console.error(err);
             setError("Flight search failed.");
             setFlights([]);
         } finally {
@@ -107,6 +108,8 @@ export default function SearchFlightsPage() {
             <Sidebar />
 
             <div className="search-flights-content">
+                <Topbar onProfileClick={() => navigate("/profile")} />
+
                 <div className="search-flights-header">
                     <h1 className="search-flights-title">Search Flights</h1>
                 </div>

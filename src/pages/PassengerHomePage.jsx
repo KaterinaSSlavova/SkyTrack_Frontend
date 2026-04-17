@@ -1,50 +1,22 @@
 import "./PassengerHomePage.css";
-import { useEffect, useState } from "react";
 import Sidebar from "../components/Sidebar";
-import { Bell } from "lucide-react";
-import { getLoggedUser } from "../api/userApi";
+import Topbar from "../components/Topbar";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 export default function PassengerHomePage() {
-    const [user, setUser] = useState(null);
+    const { user, loadingUser } = useUser();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        async function loadUser() {
-            try {
-                const data = await getLoggedUser();
-                setUser(data);
-            } catch (error) {
-                console.error("Failed to load user:", error);
-            }
-        }
-
-        loadUser();
-    }, []);
+    if (loadingUser) {
+        return <p>Loading...</p>;
+    }
 
     return (
         <div className="passenger-page">
             <Sidebar />
-
             <div className="passenger-content">
-                <div className="passenger-topbar">
-                    <button className="notification-btn" type="button">
-                        <Bell size={20} />
-                    </button>
-
-                    <div className="profile-avatar">
-                        {user?.picture ? (
-                            <img
-                                src={user.picture}
-                                alt="Profile"
-                                className="profile-image"
-                            />
-                        ) : (
-                            <span>
-                                {user?.firstName?.[0] || "U"}
-                                {user?.lastName?.[0] || ""}
-                            </span>
-                        )}
-                    </div>
-                </div>
+                <Topbar onProfileClick={() => navigate("/profile")} />
 
                 <div className="passenger-card">
                     <h1 className="passenger-title">
