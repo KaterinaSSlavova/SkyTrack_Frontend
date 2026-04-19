@@ -29,7 +29,7 @@ export default function CreateFlightPage() {
         }
 
         loadAirports();
-    }, []);
+    }, [clearErrors, handleApiError]);
 
     async function handleCreateFlight(flight) {
         try {

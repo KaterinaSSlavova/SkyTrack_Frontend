@@ -35,7 +35,7 @@ export default function UpdateFlightPage() {
         }
 
         loadData();
-    }, [id]);
+    }, [id, clearErrors, handleApiError]);
 
     async function handleUpdateFlight(updatedFlight) {
         try{

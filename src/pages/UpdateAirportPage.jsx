@@ -9,30 +9,30 @@ function UpdateAirportPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [airport, setAirport] = useState(null);
-  const {generalError,fieldErrors,clearErrors,clearFieldError,handleApiError} = useFormErrors();
+  const { generalError, fieldErrors, clearErrors, clearFieldError, handleApiError } = useFormErrors();
 
   useEffect(() => {
-    loadAirport();
-  }, []);
-
-  async function loadAirport() {
-    try{
+    async function loadAirport() {
+      try {
         clearErrors();
         const data = await getAirportById(id);
         setAirport(data);
-    } catch (error) {
+      } catch (error) {
         handleApiError(error);
+      }
     }
-  }
+
+    loadAirport();
+  }, [id, clearErrors, handleApiError]);
 
   async function handleUpdateAirport(updatedAirport) {
-      try{
-           clearErrors();
-           await updateAirport(id, updatedAirport);
-           navigate("/airports");
-      } catch(error){
-          handleApiError(error);
-      }
+    try {
+      clearErrors();
+      await updateAirport(id, updatedAirport);
+      navigate("/airports");
+    } catch (error) {
+      handleApiError(error);
+    }
   }
 
   if (!airport) {

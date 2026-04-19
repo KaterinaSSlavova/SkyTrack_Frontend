@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllAirports, archiveAirport } from "../api/airportApi";
+import { getAllAirports, archiveAirport, loadAirports } from "../api/airportApi";
 import Sidebar from "../components/Sidebar";
 import "./AirportOverviewPage.css";
 
@@ -8,12 +8,14 @@ function AirportOverviewPage() {
   const [airports, setAirports] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {loadAirports();}, []);
+  useEffect(() => {
+    async function loadAirports() {
+      const data = await getAllAirports();
+      setAirports(data.airports);
+    }
 
-  async function loadAirports() {
-    const data = await getAllAirports();
-    setAirports(data.airports);
-  }
+    loadAirports();
+  }, []);
 
   async function handleArchive(id) {
     const confirmed = window.confirm("Are you sure you want to archive this airport?");

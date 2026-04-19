@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { Routes, Route, Navigate } from "react-router-dom";
 import AirportOverviewPage from "./pages/AirportOverviewPage";
 import CreateAirportPage from "./pages/CreateAirportPage";

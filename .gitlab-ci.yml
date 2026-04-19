@@ -1,30 +1,33 @@
 stages:
+  - lint
   - build
-#  - test
-  - deploy
+  - package
+  - trigger_deploy
+
+lint:
+  stage: lint
+  script:
+    - npm ci
+    - npm run lint
 
 build:
   stage: build
   script:
     - npm ci
     - npm run build
+
+package:
+  stage: package
   rules:
-    - if: '$CI_COMMIT_BRANCH == "dev"'
-
-#test:
-#  stage: test
-#  script:
-#    - npm ci
-#    - npm run test -- --run
-#  rules:
-#    - if: '$CI_COMMIT_BRANCH == "dev"'
-
-deploy:
-  stage: deploy
+    - if: '$CI_COMMIT_BRANCH == "main"'
   script:
-    - docker build --no-cache --build-arg VITE_SUPABASE_URL="$VITE_SUPABASE_URL" --build-arg VITE_SUPABASE_ANON_KEY="$VITE_SUPABASE_ANON_KEY" --build-arg VITE_API_BASE_URL="$VITE_API_BASE_URL" -t skytrack-frontend:latest .
-    - docker stop skytrack-frontend || true
-    - docker rm skytrack-frontend || true
-    - docker run -d --name skytrack-frontend --restart unless-stopped -p 3000:80 skytrack-frontend:latest
+    - docker build -t skytrack-frontend:latest .
+
+trigger_deploy:
+  stage: trigger_deploy
   rules:
-    - if: '$CI_COMMIT_BRANCH == "dev"'
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  trigger:
+    project: your-group/skytrack-infra
+    branch: main
+
