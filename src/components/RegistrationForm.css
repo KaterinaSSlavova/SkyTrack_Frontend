@@ -1,0 +1,130 @@
+.registration-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.registration-row {
+    display: flex;
+    gap: 20px;
+}
+
+.registration-field {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.avatar-upload:hover {
+    border-color: #2563eb;
+}
+
+.avatar-placeholder {
+    font-size: 14px;
+    color: #64748b;
+    text-align: center;
+}
+
+.avatar-preview {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.registration-field label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.registration-field input {
+    height: 56px;
+    border: 1px solid #d6dce5;
+    border-radius: 16px;
+    padding: 0 18px;
+    font-size: 16px;
+    color: #1f2937;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.registration-field input:focus {
+    border-color: #173b73;
+    box-shadow: 0 0 0 3px rgba(23, 59, 115, 0.12);
+}
+
+.registration-file-input {
+    padding: 14px 0;
+}
+
+.registration-preview {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #d6dce5;
+}
+
+.registration-button {
+    margin-top: 8px;
+    height: 56px;
+    border: none;
+    border-radius: 16px;
+    background-color: #173b73;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.registration-button:hover {
+    background-color: #12315f;
+}
+
+.registration-error {
+    color: #b91c1c;
+    font-size: 14px;
+    margin: 0;
+}
+
+.hidden-file-input {
+    display: none;
+}
+
+.avatar-upload {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    border: 2px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f8fafc;
+}
+
+.registration-avatar-field {
+    align-items: center;
+}
+
+.registration-avatar-field label:first-child {
+    align-self: flex-start;
+}
+
+.avatar-upload {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    border: 2px dashed #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+    background-color: #f8fafc;
+    margin: 0 auto;
+}

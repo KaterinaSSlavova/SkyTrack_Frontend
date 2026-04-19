@@ -1,10 +1,33 @@
 stages:
+  - lint
   - build
+  - package
+  - trigger_deploy
 
-before_script:
-  - npm ci
+lint:
+  stage: lint
+  script:
+    - npm ci
+    - npm run lint
 
 build:
   stage: build
   script:
+    - npm ci
     - npm run build
+
+package:
+  stage: package
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  script:
+    - docker build -t skytrack-frontend:latest .
+
+trigger_deploy:
+  stage: trigger_deploy
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main"'
+  trigger:
+    project: your-group/skytrack-infra
+    branch: main
+
