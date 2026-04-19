@@ -28,6 +28,6 @@ trigger_deploy:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   trigger:
-    project: your-group/skytrack-infra
+    project: I547761/skytrack-infra
     branch: main
 
