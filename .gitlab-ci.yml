@@ -21,7 +21,13 @@ package:
   rules:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
-    - docker build -t skytrack-frontend:latest .
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_TOKEN
+    - docker build
+      --build-arg VITE_API_BASE_URL=$VITE_API_BASE_URL
+      --build-arg VITE_SUPABASE_URL=$VITE_SUPABASE_URL
+      --build-arg VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
+      -t $DOCKER_HUB_USERNAME/skytrack-fe:latest .
+    - docker push $DOCKER_HUB_USERNAME/skytrack-fe:latest
 
 trigger_deploy:
   stage: trigger_deploy
@@ -30,4 +36,3 @@ trigger_deploy:
   trigger:
     project: I547761/skytrack-infra
     branch: main
-
