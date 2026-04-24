@@ -22,12 +22,9 @@ package:
     - if: '$CI_COMMIT_BRANCH == "main"'
   script:
     - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_TOKEN
-    - docker build
-      --build-arg VITE_API_BASE_URL=$VITE_API_BASE_URL
-      --build-arg VITE_SUPABASE_URL=$VITE_SUPABASE_URL
-      --build-arg VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY
-      -t $DOCKER_HUB_USERNAME/skytrack-fe:latest .
+    - docker build --build-arg VITE_API_BASE_URL=$VITE_API_BASE_URL --build-arg VITE_SUPABASE_URL=$VITE_SUPABASE_URL --build-arg VITE_SUPABASE_ANON_KEY=$VITE_SUPABASE_ANON_KEY -t $DOCKER_HUB_USERNAME/skytrack-fe:latest -t $DOCKER_HUB_USERNAME/skytrack-fe:$CI_COMMIT_SHORT_SHA .
     - docker push $DOCKER_HUB_USERNAME/skytrack-fe:latest
+    - docker push $DOCKER_HUB_USERNAME/skytrack-fe:$CI_COMMIT_SHORT_SHA
 
 trigger_deploy:
   stage: trigger_deploy
