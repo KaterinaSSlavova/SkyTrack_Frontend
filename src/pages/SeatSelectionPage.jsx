@@ -29,7 +29,7 @@ export default function SeatSelectionPage() {
         setSubmitting(true);
         setError("");
         try {
-            const booking = await createBooking({
+            const _booking = await createBooking({
                 passenger,
                 flight,
                 seatId: selectedSeat.id,

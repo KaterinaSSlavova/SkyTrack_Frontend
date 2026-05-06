@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { createBooking } from "../api/bookingApi";
 import Sidebar from '../components/Sidebar';
 import "./BookingPage.css";
 
@@ -30,9 +29,6 @@ export default function BookingPage() {
         passportExpiry: "",
         nationality: "",
     });
-    const [seatId, setSeatId] = useState("");
-    const [error, setError] = useState("");
-    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setPassenger(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -105,9 +101,8 @@ export default function BookingPage() {
                          </div>
                      </div>
 
-                     {error && <p className="booking-error">{error}</p>}
-                     <button type="submit" className="booking-submit-btn" disabled={loading}>
-                         {loading ? "Booking..." : "Confirm"}
+                     <button type="submit" className="booking-submit-btn">
+                         Confirm
                      </button>
                  </form>
              </div>

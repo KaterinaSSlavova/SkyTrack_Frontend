@@ -25,8 +25,6 @@ export default function BookingCard({ booking, qrCodes, highlight, onCancelled }
     const [confirming, setConfirming] = useState(false);
     const [cancelling, setCancelling] = useState(false);
 
-    const isPast = new Date(booking.flight?.departureLocalTime) < new Date();
-
     const statusClass = booking.status === "CANCELLED" ? "status-cancelled"
         : booking.status === "COMPLETED" ? "status-completed"
         : "status-active";

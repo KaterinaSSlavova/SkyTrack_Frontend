@@ -3,6 +3,11 @@ import userEvent from "@testing-library/user-event";
 import { MemoryRouter, useNavigate } from "react-router-dom";
 import { vi } from "vitest";
 import Sidebar from "../components/Sidebar";
+import { it, expect, beforeEach } from "vitest";
+
+beforeEach(() => {
+    localStorage.clear();
+});
 
 vi.mock("react-router-dom", async (importOriginal) => ({
     ...await importOriginal(),
