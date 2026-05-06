@@ -5,7 +5,7 @@ import "./Topbar.css";
 export default function Topbar({ onProfileClick }) {
     const { user, loadingUser } = useUser();
 
-    if (loadingUser) return null; // or a skeleton
+    if (loadingUser) return null;
 
     return (
         <div className="passenger-topbar">

@@ -1,0 +1,176 @@
+.seat-page {
+    min-height: 100vh;
+    background-color: #f3f5f7;
+}
+
+.seat-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 56px 48px;
+    box-sizing: border-box;
+}
+
+.seat-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 36px 0;
+}
+
+.seat-flight-summary {
+    background-color: #ffffff;
+    border: 1px solid #d9dee7;
+    border-radius: 24px;
+    padding: 24px 32px;
+    margin-bottom: 28px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+}
+
+.seat-summary-route {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0;
+}
+
+.seat-summary-detail {
+    font-size: 16px;
+    color: #64748b;
+    margin: 6px 0 0 0;
+}
+
+.seat-loading, .seat-error {
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 20px;
+}
+
+.seat-error { color: #dc2626; }
+
+.seat-legend {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #475569;
+}
+
+.legend-box {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+}
+
+.legend-box.available { background-color: #e8f2fb; border: 1px solid #93c5fd; }
+.legend-box.unavailable { background-color: #f1f5f9; border: 1px solid #cbd5e1; }
+.legend-box.selected { background-color: #163d78; border: 1px solid #163d78; }
+
+.seat-map {
+    background-color: #ffffff;
+    border: 1px solid #d9dee7;
+    border-radius: 24px;
+    padding: 32px;
+    box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06);
+    margin-bottom: 24px;
+    overflow-x: auto;
+}
+
+.seat-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+
+.seat-row-label {
+    font-size: 13px;
+    color: #94a3b8;
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.seat-row-seats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.seat-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    border: none;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.seat-available {
+    background-color: #e8f2fb;
+    color: #1d4f91;
+    border: 1px solid #93c5fd;
+}
+
+.seat-available:hover {
+    background-color: #bfdbfe;
+}
+
+.seat-unavailable {
+    background-color: #f1f5f9;
+    color: #cbd5e1;
+    border: 1px solid #e2e8f0;
+    cursor: not-allowed;
+}
+
+.seat-selected {
+    background-color: #163d78;
+    color: #ffffff;
+    border: 1px solid #163d78;
+}
+
+.seat-selected-info {
+    background-color: #f0f7ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 14px;
+    padding: 16px 20px;
+    font-size: 16px;
+    color: #1d4f91;
+    margin-bottom: 24px;
+}
+
+.seat-confirm-btn {
+    height: 58px;
+    width: 100%;
+    border: none;
+    border-radius: 16px;
+    background-color: #163d78;
+    color: white;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.seat-confirm-btn:hover { background-color: #0f2f60; }
+.seat-confirm-btn:disabled {
+    background-color: #94a3b8;
+    cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+    .seat-content {
+        margin-left: 0;
+        padding: 24px 16px;
+    }
+
+    .seat-title { font-size: 36px; }
+}
