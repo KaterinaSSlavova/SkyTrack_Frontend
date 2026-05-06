@@ -1,0 +1,106 @@
+.bookings-page {
+    min-height: 100vh;
+    background-color: #f3f5f7;
+}
+
+.bookings-content {
+    margin-left: 240px;
+    min-height: 100vh;
+    padding: 56px 48px;
+    box-sizing: border-box;
+}
+
+.bookings-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 36px 0;
+}
+
+.bookings-loading, .bookings-error {
+    font-size: 16px;
+    color: #64748b;
+}
+
+.bookings-error { color: #dc2626; }
+
+.bookings-empty {
+    background-color: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 20px;
+    padding: 28px;
+    color: #64748b;
+    font-size: 18px;
+    text-align: center;
+}
+
+.bookings-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    border-bottom: 2px solid #e2e8f0;
+}
+
+.bookings-tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #64748b;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.bookings-tab:hover {
+    color: #163d78;
+}
+
+.bookings-tab.active {
+    color: #163d78;
+    border-bottom: 2px solid #163d78;
+}
+
+.tab-badge {
+    background-color: #e2e8f0;
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+.bookings-tab.active .tab-badge {
+    background-color: #163d78;
+    color: white;
+}
+
+.tab-badge-cancelled {
+    background-color: #fee2e2;
+    color: #dc2626;
+}
+
+.bookings-tab.active .tab-badge-cancelled {
+    background-color: #dc2626;
+    color: white;
+}
+
+@media (max-width: 1024px) {
+    .bookings-content {
+        margin-left: 220px;
+        padding: 40px 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    .bookings-content {
+        margin-left: 0;
+        padding: 24px 16px;
+    }
+    .bookings-title { font-size: 36px; }
+}

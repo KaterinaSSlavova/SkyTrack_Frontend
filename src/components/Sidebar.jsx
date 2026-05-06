@@ -43,6 +43,10 @@ export default function Sidebar() {
                         <Link to="/flights/search" className="sidebar-item">
                             Search Flights
                         </Link>
+
+                        <Link to="/bookings" className="sidebar-item">
+                            Bookings
+                        </Link>
                     </>
                 )}
 

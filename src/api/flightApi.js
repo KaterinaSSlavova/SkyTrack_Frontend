@@ -26,6 +26,11 @@ export async function cancelFlight(id){
 }
 
 export async function searchFlights(departureIata, arrivalIata, departureDate){
-   const response = await api.get(`${url}/search`,{params: {departureIata, arrivalIata, departureDate}});
+   const response = await api.get(`${url}/duffel/search`,{params: {departureIata, arrivalIata, departureDate}});
    return response.data;
+}
+
+export async function saveDuffelFlight(flight){
+   const response = await api.post(`${url}/duffel/save`, flight);
+   return response.data
 }

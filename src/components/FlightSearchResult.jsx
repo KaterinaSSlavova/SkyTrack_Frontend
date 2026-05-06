@@ -1,4 +1,6 @@
 import { Plane } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { saveDuffelFlight } from "../api/flightApi";
 
 function formatTime(value) {
     if (!value) return "--:--";
@@ -11,12 +13,13 @@ function formatTime(value) {
     }).format(date);
 }
 
-export default function FlightSearchResult({
-    flights = [],
-    loading = false,
-    error = "",
-    hasSearched = false
-}) {
+export default function FlightSearchResult({flights = [],loading = false,error = "",hasSearched = false}) {
+    const navigate = useNavigate();
+  const handleFlightClick = async (flight) => {
+      const savedFlight = await saveDuffelFlight(flight);
+      navigate("/booking", { state: { flight: savedFlight, dbFlightId: savedFlight.id }});
+  };
+
     return (
         <div className="flight-results">
             {flights.length > 0 && (
@@ -24,7 +27,7 @@ export default function FlightSearchResult({
                     <h2 className="results-title">Available Flights</h2>
 
                    {flights.map((flight) => (
-                       <div key={flight.id} className="flight-card">
+                       <div key={flight.externalId} className="flight-card" onClick={() => handleFlightClick(flight)} style={{cursor: "pointer"}}>
                            <div className="flight-row">
 
                                <div className="flight-left">
@@ -52,7 +55,12 @@ export default function FlightSearchResult({
                                </div>
 
                                <div className="flight-price-block">
-                                   <p className="flight-price">€{flight.price}</p>
+                                   <p className="flight-price">
+                                       {new Intl.NumberFormat('en-GB', {
+                                           style: 'currency',
+                                           currency: flight.currency
+                                       }).format(flight.price)}
+                                   </p>
                                    <p className="flight-per-person">per person</p>
                                </div>
 

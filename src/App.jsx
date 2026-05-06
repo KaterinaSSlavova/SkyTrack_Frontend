@@ -11,6 +11,9 @@ import UpdateFlightPage from "./pages/UpdateFlightPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
 import ProfilePage from "./pages/ProfilePage";
+import BookingPage from "./pages/BookingPage";
+import SeatSelectionPage from "./pages/SeatSelectionPage";
+import MyBookingsPage from "./pages/MyBookingsPage";
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
             <Route path="/flights" element={<FlightsPage />} />
             <Route path="/flights/create" element={<CreateFlightPage />} />
             <Route path="/flights/update/:id" element={<UpdateFlightPage />} />
+            <Route path="/booking" element={<BookingPage />} />
+            <Route path="/booking/seats" element={<SeatSelectionPage />} />
+            <Route path="/bookings" element={<MyBookingsPage />} />
        </Routes>
       </UserProvider>
   )
