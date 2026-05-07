@@ -1,0 +1,95 @@
+.boarding-page {
+    min-height: 100vh;
+    background: #eef3f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.boarding-pass {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+.boarding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.boarding-header h2 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.boarding-status {
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.boarding-status.cancelled {
+    background: #ffebee;
+    color: #c62828;
+}
+
+.boarding-route {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 32px 0;
+    text-align: center;
+}
+
+.boarding-route h1 {
+    margin: 0;
+    font-size: 42px;
+}
+
+.boarding-route p {
+    margin: 4px 0 0;
+    color: #666;
+    font-size: 13px;
+}
+
+.boarding-plane {
+    font-size: 28px;
+}
+
+.boarding-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.boarding-info-grid span,
+.boarding-footer span {
+    display: block;
+    font-size: 12px;
+    color: #777;
+}
+
+.boarding-info-grid strong,
+.boarding-footer strong {
+    font-size: 15px;
+}
+
+.boarding-footer {
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px dashed #ccc;
+}
+
+.boarding-loading,
+.boarding-error {
+    text-align: center;
+    margin-top: 40px;
+}

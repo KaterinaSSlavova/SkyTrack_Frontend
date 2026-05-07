@@ -14,6 +14,7 @@ import ProfilePage from "./pages/ProfilePage";
 import BookingPage from "./pages/BookingPage";
 import SeatSelectionPage from "./pages/SeatSelectionPage";
 import MyBookingsPage from "./pages/MyBookingsPage";
+import BoardingPassPage from "./pages/BoardingPassPage"
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/booking/seats" element={<SeatSelectionPage />} />
             <Route path="/bookings" element={<MyBookingsPage />} />
+            <Route path="/boarding-pass/:reference" element={<BoardingPassPage />} />
        </Routes>
       </UserProvider>
   )
