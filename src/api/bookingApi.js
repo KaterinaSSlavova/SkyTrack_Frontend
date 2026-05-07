@@ -25,3 +25,8 @@ export async function getQRCode(reference){
    const response = await api.get(`${url}/${reference}/qr`,{responseType: "blob"});
    return URL.createObjectURL(response.data);
 }
+
+export async function verifyBooking(reference) {
+   const response = await api.get(`${url}/verify/${reference}`);
+   return response.data;
+}
