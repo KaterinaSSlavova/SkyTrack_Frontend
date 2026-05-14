@@ -7,7 +7,7 @@ stages:
 lint:
   stage: lint
   script:
-    - npm ci
+    - npm install
     - npm run lint
 
 build:
