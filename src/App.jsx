@@ -6,8 +6,6 @@ import RegistrationPage from "./pages/RegistrationPage";
 import PassengerHomePage from "./pages/PassengerHomePage";
 import SearchFlightsPage from "./pages/SearchFlightsPage";
 import FlightsPage from "./pages/FlightsPage";
-import CreateFlightPage from "./pages/CreateFlightPage";
-import UpdateFlightPage from "./pages/UpdateFlightPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./context/UserContext";
 import ProfilePage from "./pages/ProfilePage";
@@ -15,6 +13,7 @@ import BookingPage from "./pages/BookingPage";
 import SeatSelectionPage from "./pages/SeatSelectionPage";
 import MyBookingsPage from "./pages/MyBookingsPage";
 import BoardingPassPage from "./pages/BoardingPassPage"
+import FlightDetailsPage from "./pages/FlightDetailsPage";
 
 function App() {
   return (
@@ -30,8 +29,7 @@ function App() {
             <Route path="/airports/update/:id" element={<UpdateAirportPage />} />
             <Route path="/flights/search" element={<SearchFlightsPage />} />
             <Route path="/flights" element={<FlightsPage />} />
-            <Route path="/flights/create" element={<CreateFlightPage />} />
-            <Route path="/flights/update/:id" element={<UpdateFlightPage />} />
+            <Route path="/flights/:id" element={<FlightDetailsPage />} />
             <Route path="/booking" element={<BookingPage />} />
             <Route path="/booking/seats" element={<SeatSelectionPage />} />
             <Route path="/bookings" element={<MyBookingsPage />} />
