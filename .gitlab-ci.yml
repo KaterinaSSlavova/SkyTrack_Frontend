@@ -13,7 +13,7 @@ lint:
 build:
   stage: build
   script:
-    - npm ci
+    - npm install
     - npm run build
 
 package:
