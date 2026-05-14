@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import FlightForm from "../components/FlightForm";
-import { createFlight } from "../api/flightApi";
-import { getAllAirports } from "../api/airportApi";
 import { useFormErrors } from "../components/useFormErrors";
 import "./FlightFormPage.css";
 

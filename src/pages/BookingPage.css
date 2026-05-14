@@ -109,10 +109,13 @@
     box-sizing: border-box;
     width: 100%;
     appearance: none;
+    -webkit-appearance: none;
 }
 
-.booking-input[type="date"] {
-    appearance: auto;
+input.booking-input[type="date"] {
+    -webkit-appearance: menulist-button;
+    appearance: menulist-button;
+    padding: 0 12px;
 }
 
 .booking-input:focus,

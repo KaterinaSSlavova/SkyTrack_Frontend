@@ -1,0 +1,269 @@
+/* ── Page shell ── */
+.flight-details-page {
+    display: flex;
+    min-height: 100vh;
+    background: #f3f4f6;
+}
+
+.flight-details-content {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 32px;
+    box-sizing: border-box;
+}
+
+.loading-text {
+    color: #64748b;
+    font-size: 16px;
+}
+
+/* ── Card ── */
+.flight-details-card {
+    width: 100%;
+    max-width: 900px;
+    background: #fff;
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Header row ── */
+.flight-details-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 36px;
+}
+
+.flight-details-label {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #1d4ed8;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.flight-details-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1;
+    margin: 0;
+}
+
+.back-button {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 14px;
+    color: #475569;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.back-button:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+/* ── Info grids ── */
+.flight-info-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid #e2e8f0;
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.flight-info-grid--three {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.info-cell {
+    padding: 20px 24px;
+    border-right: 1px solid #e2e8f0;
+}
+
+.info-cell:last-child {
+    border-right: none;
+}
+
+.cell-label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #94a3b8;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.cell-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1e293b;
+    margin: 0;
+}
+
+/* ── Status badge ── */
+.status-badge {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    margin: 0;
+}
+
+.status-badge--scheduled {
+    color: #1d4ed8;
+    background: #eff6ff;
+}
+
+.status-badge--delayed {
+    color: #b45309;
+    background: #fffbeb;
+}
+
+.status-badge--cancelled {
+    color: #dc2626;
+    background: #fef2f2;
+}
+
+/* ── Edit section ── */
+.edit-title {
+    font-size: 22px;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 36px 0 20px;
+}
+
+.flight-form-section {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+}
+
+.form-input {
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 1px solid #d1d5db;
+    font-size: 15px;
+    color: #1e293b;
+    background: #fff;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #1d4ed8;
+    box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
+}
+
+.form-input::placeholder {
+    color: #94a3b8;
+}
+
+/* Select arrow */
+.form-select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+/* ── Actions ── */
+.flight-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 32px;
+}
+
+.save-button {
+    background: #1d4ed8;
+    color: #fff;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.15s;
+}
+
+.save-button:hover {
+    background: #1e40af;
+}
+
+.cancel-button {
+    background: #e5e7eb;
+    color: #374151;
+    border: none;
+    padding: 13px 28px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.15s;
+}
+
+.cancel-button:hover {
+    background: #d1d5db;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+    .flight-details-content {
+        margin-left: 180px;
+        width: calc(100% - 180px);
+    }
+}
+
+@media (max-width: 768px) {
+    .flight-details-content {
+        margin-left: 88px;
+        width: calc(100% - 88px);
+        padding: 24px 16px;
+    }
+
+    .flight-info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flight-info-grid--three {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .flight-form-section {
+        grid-template-columns: 1fr;
+    }
+
+    .flight-details-title {
+        font-size: 36px;
+    }
+}
