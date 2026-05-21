@@ -5,7 +5,7 @@ import "./LoginPage.css";
 
 export default function LoginPage() {
     return (
-        <div className="login-page">
+        <main className="login-page">
             <div className="login-card">
                 <div className="login-header">
                     <h1 className="login-title">  <Plane size={28} style={{marginRight:"8px"}}/> Welcome back</h1>
@@ -20,6 +20,6 @@ export default function LoginPage() {
                                     Don't have an account? <Link to="/auth/register">Create one</Link>
                  </p>
             </div>
-        </div>
+        </main>
     );
 }

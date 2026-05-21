@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /auth/login
+Allow: /auth/register
+Disallow: /
