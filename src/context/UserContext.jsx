@@ -7,7 +7,7 @@ export function UserProvider({ children }) {
             const stored = localStorage.getItem("user");
             return stored ? JSON.parse(stored) : null;
         });
-    const [loadingUser, setLoadingUser] = useState(false);
+    const [loadingUser] = useState(false);
 
     return (
         <UserContext.Provider value={{ user, setUser, loadingUser }}>
