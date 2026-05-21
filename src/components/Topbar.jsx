@@ -1,8 +1,9 @@
 import { Bell } from "lucide-react";
 import { useUser } from "../context/UserContext";
 import { useEffect, useRef, useState } from "react";
-import { getAllNotifications, markNotificationAsRead,markAllNotificationsAsRead} from "../api/notificationApi";
-import {getNotification,disconnectNotificationSocket} from "../api/notificationSocket";
+import { getAllNotifications, markNotificationAsRead, markAllNotificationsAsRead } from "../api/notificationApi";
+import { getNotification, disconnectNotificationSocket } from "../api/notificationSocket";
+import { getToken } from "../api/tokenStore";
 import "./Topbar.css";
 
 export default function Topbar({ onProfileClick }) {
@@ -21,14 +22,16 @@ export default function Topbar({ onProfileClick }) {
     }
 
     useEffect(() => {
+        if (!user) return;
         loadNotifications();
 
-        getNotification((notification) => {
+        const token = getToken();
+        getNotification(token, (notification) => {
             setNotifications((prev) => [notification, ...prev]);
         });
 
         return () => disconnectNotificationSocket();
-    }, []);
+    }, [user]);
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -85,10 +88,7 @@ export default function Topbar({ onProfileClick }) {
                         <div className="notification-dropdown-header">
                             <span className="notification-dropdown-title">Notifications</span>
                             {unreadCount > 0 && (
-                                <button
-                                    className="mark-all-btn"
-                                    onClick={handleMarkAllRead}
-                                >
+                                <button className="mark-all-btn" onClick={handleMarkAllRead}>
                                     Mark all read
                                 </button>
                             )}
@@ -106,9 +106,7 @@ export default function Topbar({ onProfileClick }) {
                                     >
                                         {!n.read && <span className="unread-dot" />}
                                         <div className="notification-body">
-                                            {n.title && (
-                                                <p className="notification-title">{n.title}</p>
-                                            )}
+                                            {n.title && <p className="notification-title">{n.title}</p>}
                                             <p className="notification-message">{n.message}</p>
                                             {n.createdAt && (
                                                 <p className="notification-time">

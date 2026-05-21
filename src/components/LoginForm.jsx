@@ -4,6 +4,7 @@ import { login } from "../api/authApi";
 import { getLoggedUser } from "../api/userApi";
 import { useFormErrors } from "../components/useFormErrors";
 import { useUser } from "../context/UserContext";
+import { setToken } from "../api/tokenStore";
 import "./LoginForm.css";
 
 export default function LoginForm() {
@@ -41,11 +42,8 @@ export default function LoginForm() {
             clearErrors();
 
             const response = await login(formData);
-
-            localStorage.setItem("token", response.token);
-
+            setToken(response.token);
             const fullUser = await getLoggedUser();
-
             setUser(fullUser);
             localStorage.setItem("user", JSON.stringify(fullUser));
 
