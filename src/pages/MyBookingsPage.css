@@ -68,7 +68,7 @@
 
 .tab-badge {
     background-color: #e2e8f0;
-    color: #64748b;
+    color: #475569;
     font-size: 12px;
     font-weight: 700;
     padding: 2px 8px;
@@ -82,7 +82,7 @@
 
 .tab-badge-cancelled {
     background-color: #fee2e2;
-    color: #dc2626;
+    color: #b91c1c;
 }
 
 .bookings-tab.active .tab-badge-cancelled {
