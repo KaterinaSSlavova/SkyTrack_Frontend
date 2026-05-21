@@ -14,7 +14,7 @@ export default function FlightSearchForm({
     return (
         <div className="search-box">
             <div className="search-field-group search-field-with-dropdown">
-                <label className="search-label">From</label>
+                <label className="search-label" htmlFor="departure">From</label>
                 <input
                     id="departure"
                     type="text"
@@ -42,7 +42,7 @@ export default function FlightSearchForm({
             <div className="search-arrow-circle">→</div>
 
             <div className="search-field-group search-field-with-dropdown">
-                <label className="search-label">To</label>
+                <label className="search-label" htmlFor="arrival">To</label>
                 <input
                     id="arrival"
                     type="text"
@@ -68,7 +68,7 @@ export default function FlightSearchForm({
             </div>
 
             <div className="search-field-group">
-                <label className="search-label">Date</label>
+                <label className="search-label" htmlFor="departure-date">Date</label>
                 <input
                     id="departure-date"
                     type="date"
