@@ -60,7 +60,7 @@ export default function MyBookingsPage() {
         : cancelledBookings;
 
     return (
-        <div className="bookings-page">
+        <main className="bookings-page">
             <Sidebar />
             <div className="bookings-content">
                 <Topbar onProfileClick={() => navigate("/profile")} />
@@ -122,6 +122,6 @@ export default function MyBookingsPage() {
                     </>
                 )}
             </div>
-        </div>
+        </main>
     );
 }
