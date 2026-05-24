@@ -4,7 +4,6 @@ import { login } from "../api/authApi";
 import { getLoggedUser } from "../api/userApi";
 import { useFormErrors } from "../components/useFormErrors";
 import { useUser } from "../context/UserContext";
-import { setToken } from "../api/tokenStore";
 import "./LoginForm.css";
 
 export default function LoginForm() {
@@ -42,7 +41,6 @@ export default function LoginForm() {
             clearErrors();
 
             const response = await login(formData);
-            setToken(response.token);
             const fullUser = await getLoggedUser();
             setUser(fullUser);
             localStorage.setItem("user", JSON.stringify(fullUser));
@@ -72,6 +70,7 @@ export default function LoginForm() {
                     name="email"
                     type="email"
                     placeholder="Enter email"
+                    autoComplete="email"
                     value={formData.email}
                     onChange={handleChange}
                     className={fieldErrors.email ? "login-input-error" : ""}
@@ -87,6 +86,7 @@ export default function LoginForm() {
                     name="password"
                     type="password"
                     placeholder="Enter password"
+                    autoComplete="current-password"
                     value={formData.password}
                     onChange={handleChange}
                     className={fieldErrors.password ? "login-input-error" : ""}

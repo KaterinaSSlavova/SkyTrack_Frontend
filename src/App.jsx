@@ -14,6 +14,11 @@ import SeatSelectionPage from "./pages/SeatSelectionPage";
 import MyBookingsPage from "./pages/MyBookingsPage";
 import BoardingPassPage from "./pages/BoardingPassPage"
 import FlightDetailsPage from "./pages/FlightDetailsPage";
+import { loadStripe } from '@stripe/stripe-js';
+import { Elements } from '@stripe/react-stripe-js';
+import CheckoutForm from "./components/CheckoutForm";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function App() {
   return (
@@ -34,6 +39,7 @@ function App() {
             <Route path="/booking/seats" element={<SeatSelectionPage />} />
             <Route path="/bookings" element={<MyBookingsPage />} />
             <Route path="/boarding-pass/:reference" element={<BoardingPassPage />} />
+            <Route path="/checkout" element={<CheckoutForm />} />
        </Routes>
       </UserProvider>
   )

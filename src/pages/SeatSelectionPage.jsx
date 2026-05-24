@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { getSeatMap } from "../api/seatApi";
 import { createBooking } from "../api/bookingApi";
 import Sidebar from '../components/Sidebar';
+import Topbar from "../components/Topbar";
 import "./SeatSelectionPage.css";
 
 export default function SeatSelectionPage() {
@@ -55,6 +56,8 @@ export default function SeatSelectionPage() {
         <div className="seat-page">
             <Sidebar />
             <div className="seat-content">
+                <Topbar onProfileClick={() => navigate("/profile")} />
+
                 <h2 className="seat-title">Select Your Seat</h2>
 
                 <div className="seat-flight-summary">

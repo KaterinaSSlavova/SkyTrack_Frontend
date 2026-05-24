@@ -1,16 +1,25 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Plane } from "lucide-react";
+import { logout } from "../api/authApi";
+import { useUser } from "../context/UserContext";
 import "./Sidebar.css";
 
 export default function Sidebar() {
     const navigate = useNavigate();
+    const { setUser } = useUser();
     const user = JSON.parse(localStorage.getItem("user"));
 
-    function handleLogout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        navigate("/auth/login");
-    }
+    async function handleLogout() {
+           try {
+               await logout();
+           } catch (error) {
+               console.error("Logout failed:", error);
+           } finally {
+               localStorage.removeItem("user");
+               setUser(null);
+               navigate("/auth/login");
+           }
+       }
 
     return (
         <div className="sidebar">

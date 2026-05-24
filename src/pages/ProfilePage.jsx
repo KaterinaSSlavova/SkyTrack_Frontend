@@ -146,10 +146,7 @@ export default function ProfilePage() {
             <Sidebar />
 
             <div className="profile-content">
-                <Topbar
-                    user={user}
-                    onProfileClick={() => navigate("/profile")}
-                />
+                <Topbar onProfileClick={() => navigate("/profile")}/>
 
                 <div className="profile-card">
                     <h1 className="profile-title">My Profile</h1>
