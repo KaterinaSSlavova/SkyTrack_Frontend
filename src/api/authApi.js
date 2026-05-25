@@ -12,6 +12,6 @@ export async function register(data){
     return response.data;
 }
 
-export async function logout(refreshToken) {
+export async function logout() {
     await api.post(`${url}/logout`);
 }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getSeatMap } from "../api/seatApi";
-import { createBooking } from "../api/bookingApi";
+import { createPaymentIntent } from "../api/paymentApi";
 import Sidebar from '../components/Sidebar';
 import Topbar from "../components/Topbar";
 import "./SeatSelectionPage.css";
@@ -30,14 +30,16 @@ export default function SeatSelectionPage() {
         setSubmitting(true);
         setError("");
         try {
-            const _booking = await createBooking({
-                passenger,
-                flight,
-                seatId: selectedSeat.id,
+            const amountInCents = Math.round(flight.price * 100);
+            const { clientSecret } = await createPaymentIntent(
+                amountInCents,
+                { passenger, flight, seatId: selectedSeat.id }
+            );
+            navigate("/payment", {
+                state: { clientSecret }
             });
-            navigate("/bookings");
         } catch {
-            setError("Failed to create booking. Please try again.");
+            setError("Failed to initiate payment. Please try again.");
         } finally {
             setSubmitting(false);
         }
@@ -116,7 +118,7 @@ export default function SeatSelectionPage() {
                             disabled={!selectedSeat || submitting}
                             onClick={handleConfirm}
                         >
-                            {submitting ? "Booking..." : "Confirm Booking"}
+                            {submitting ? "Initiating payment..." : "Confirm Booking"}
                         </button>
                     </>
                 )}

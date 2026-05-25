@@ -1,57 +1,77 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, useStripe, useElements, PaymentElement } from '@stripe/react-stripe-js';
-import { createPaymentIntent } from '../api/paymentApi';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { confirmPayment } from '../api/paymentApi';
+import "./CheckoutForm.css";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 function PaymentForm() {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!stripe || !elements) return;
-
     setLoading(true);
 
-    const { error } = await stripe.confirmPayment({
+    const { error, paymentIntent } = await stripe.confirmPayment({
       elements,
-      confirmParams: {
-        return_url: 'http://localhost:5173/payment-success',
-      },
+      confirmParams: {},
+      redirect: 'if_required',
     });
 
-    if (error) setMessage(error.message);
+    if (error) {
+      setMessage(error.message);
+      setLoading(false);
+      return;
+    }
+
+    if (paymentIntent.status === 'succeeded') {
+      try {
+        await confirmPayment(paymentIntent.id);
+        navigate('/bookings');
+      } catch {
+        setMessage('Payment succeeded but booking failed. Please contact support.');
+      }
+    }
+
     setLoading(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       <PaymentElement />
-      <button type="submit" disabled={!stripe || loading}>
+      <button className="checkout-pay-btn" type="submit" disabled={!stripe || loading}>
         {loading ? 'Processing...' : 'Pay Now'}
       </button>
-      {message && <p style={{ color: 'red' }}>{message}</p>}
+      {message && <p className="checkout-error">{message}</p>}
     </form>
   );
 }
 
-export default function CheckoutForm({ amount = 1999, currency = 'eur' }) {
-  const [clientSecret, setClientSecret] = useState('');
+export default function CheckoutPage() {
+  const { state } = useLocation();
+  const clientSecret = state?.clientSecret;
 
-  useEffect(() => {
-    createPaymentIntent(amount, currency)
-      .then(data => setClientSecret(data.clientSecret));
-  }, [amount, currency]);
-
-  if (!clientSecret) return <p>Loading payment form...</p>;
+  if (!clientSecret) return <p>No payment data found.</p>;
 
   return (
-    <Elements stripe={stripePromise} options={{ clientSecret }}>
-      <PaymentForm />
-    </Elements>
+    <div className="checkout-page">
+      <div className="checkout-card">
+        <div className="checkout-header">
+          <h2 className="checkout-title">Complete Payment ✈️</h2>
+          <p className="checkout-subtitle">Enter your card details to confirm your booking</p>
+        </div>
+        <hr className="checkout-divider" />
+        <Elements stripe={stripePromise} options={{ clientSecret }}>
+          <PaymentForm />
+        </Elements>
+      </div>
+    </div>
   );
 }

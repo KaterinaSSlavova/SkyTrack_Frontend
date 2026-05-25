@@ -40,7 +40,7 @@ export default function LoginForm() {
         try {
             clearErrors();
 
-            const response = await login(formData);
+            await login(formData);
             const fullUser = await getLoggedUser();
             setUser(fullUser);
             localStorage.setItem("user", JSON.stringify(fullUser));
