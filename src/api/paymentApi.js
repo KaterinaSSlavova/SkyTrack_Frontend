@@ -1,11 +1,21 @@
 import api from "./apiClient";
 
-export async function createPaymentIntent(amount,bookingData, currency = 'eur') {
-  const response = await api.post('/payment/create-payment-intent', { amount,currency,bookingRequest: bookingData });
-  return response.data;
+export async function createPaymentIntent(amount, bookingData, currency = "eur") {
+    const response = await api.post("/payment/create-payment-intent", {
+        amount,
+        currency,
+        bookingRequest: bookingData,
+    });
+
+    return response.data;
 }
 
 export async function confirmPayment(paymentIntentId) {
-  const response = await api.post(`/payment/confirm?paymentIntentId=${paymentIntentId}`);
-  return response.data;
+    const response = await api.post("/payment/confirm", null, {
+        params: {
+            paymentIntentId,
+        },
+    });
+
+    return response.data;
 }

@@ -108,14 +108,24 @@
     outline: none;
     box-sizing: border-box;
     width: 100%;
+}
+
+/* Only hide native dropdown arrow for select */
+.booking-select {
     appearance: none;
     -webkit-appearance: none;
 }
 
+/* Keep browser calendar picker working */
 input.booking-input[type="date"] {
-    -webkit-appearance: menulist-button;
-    appearance: menulist-button;
-    padding: 0 12px;
+    appearance: auto;
+    -webkit-appearance: auto;
+    cursor: pointer;
+    padding: 0 18px;
+}
+
+input.booking-input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
 }
 
 .booking-input:focus,
