@@ -95,9 +95,14 @@ export default function SearchFlightsPage() {
 
             setFlights(response);
         } catch (err) {
-            console.error(err);
-            setError("Flight search failed.");
-            setFlights([]);
+              console.error(err);
+
+              setError(
+                  err.response?.data?.message ||
+                  "Flight search failed."
+              );
+
+              setFlights([]);
         } finally {
             setLoading(false);
         }

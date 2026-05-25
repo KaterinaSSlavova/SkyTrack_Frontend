@@ -7,14 +7,14 @@ stages:
 lint:
   stage: lint
   script:
-    - npm install
-    - npm run lint
+    - pnpm install --frozen-lockfile
+    - pnpm lint
 
 build:
   stage: build
   script:
-    - npm install
-    - npm run build
+    - pnpm install --frozen-lockfile
+    - pnpm build
 
 package:
   stage: package

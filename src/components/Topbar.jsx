@@ -3,7 +3,6 @@ import { useUser } from "../context/UserContext";
 import { useEffect, useRef, useState } from "react";
 import { getAllNotifications, markNotificationAsRead, markAllNotificationsAsRead } from "../api/notificationApi";
 import { getNotification, disconnectNotificationSocket } from "../api/notificationSocket";
-import { getToken } from "../api/tokenStore";
 import "./Topbar.css";
 
 export default function Topbar({ onProfileClick }) {
@@ -23,14 +22,27 @@ export default function Topbar({ onProfileClick }) {
 
     useEffect(() => {
         if (!user) return;
-        loadNotifications();
 
-        const token = getToken();
-        getNotification(token, (notification) => {
+      function connectSocket() {
+        disconnectNotificationSocket();
+
+        getNotification((notification) => {
             setNotifications((prev) => [notification, ...prev]);
         });
+      }
 
-        return () => disconnectNotificationSocket();
+       loadNotifications();
+       connectSocket();
+
+       window.addEventListener("auth-refreshed", async () => {
+           await loadNotifications();
+           connectSocket();
+       });
+
+        return () => {
+           window.removeEventListener("auth-refreshed", connectSocket);
+           disconnectNotificationSocket();
+        };
     }, [user]);
 
     useEffect(() => {

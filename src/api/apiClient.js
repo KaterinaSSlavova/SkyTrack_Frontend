@@ -15,4 +15,33 @@ api.interceptors.request.use((config) => {
     return config;
 });
 
+api.interceptors.response.use(
+    (response) => response,
+
+    async (error) => {
+        const originalRequest = error.config;
+
+        if (
+            error.response?.status === 401 &&
+            !originalRequest._retry &&
+            !originalRequest.url.startsWith("/auth/")
+        ) {
+            originalRequest._retry = true;
+
+            try {
+                await api.post("/auth/refresh");
+
+                window.dispatchEvent(new Event("auth-refreshed"));
+
+                return api(originalRequest);
+            }
+            catch {
+                window.location.href = "/login";
+            }
+        }
+
+        return Promise.reject(error);
+    }
+);
+
 export default api;

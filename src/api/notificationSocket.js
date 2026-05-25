@@ -1,28 +1,26 @@
 import { Client } from "@stomp/stompjs";
-import { getToken } from "./tokenStore";
 
 const socketUrl = import.meta.env.VITE_WS_URL;
 let client = null;
 
-export function getNotification(onMessage){
-   const token = getToken();
-   client = new Client({
-     brokerURL: `${socketUrl}/ws`,
-     connectHeaders: { Authorization: `Bearer ${token}` },
-     onConnect: () => {
-       client.subscribe("/user/queue/notifications", (message) => {
-                                      const notification = JSON.parse(message.body);
-                                      onMessage(notification);
-                                  });
-     },
-     onStompError: (frame) => {
-                               console.error("STOMP error", frame);
-                           },
-   });
+export function getNotification(onMessage) {
+    client = new Client({
+        brokerURL: `${socketUrl}/ws`,
 
-   client.activate();
+        onConnect: () => {
+            client.subscribe("/user/queue/notifications", (message) => {
+                const notification = JSON.parse(message.body);
+                onMessage(notification);
+            });
+        },
+
+        onStompError: (frame) => {
+            console.error("STOMP error", frame);
+        },
+    });
+
+    client.activate();
 }
-
 
 export function disconnectNotificationSocket() {
     if (client) {

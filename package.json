@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@stomp/stompjs": "^7.3.0",
+    "@stripe/react-stripe-js": "^6.4.0",
+    "@stripe/stripe-js": "^9.6.0",
     "@supabase/supabase-js": "^2.102.1",
     "axios": "^1.13.6",
     "lucide-react": "^1.7.0",

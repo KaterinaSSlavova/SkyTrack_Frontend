@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Sidebar from '../components/Sidebar';
+import Topbar from "../components/Topbar";
 import "./BookingPage.css";
 
 function formatTime(value) {
@@ -45,6 +46,8 @@ export default function BookingPage() {
      <div className="booking-page">
          <Sidebar />
          <div className="booking-content">
+             <Topbar onProfileClick={() => navigate("/profile")} />
+
              <h2 className="booking-title">Book Flight</h2>
 
              <div className="booking-flight-summary">

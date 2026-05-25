@@ -11,3 +11,7 @@ export async function register(data){
     const response = await api.post(`${url}/register`, data);
     return response.data;
 }
+
+export async function logout() {
+    await api.post(`${url}/logout`);
+}
