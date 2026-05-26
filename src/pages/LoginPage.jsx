@@ -8,7 +8,9 @@ export default function LoginPage() {
         <main className="login-page">
             <div className="login-card">
                 <div className="login-header">
-                    <h1 className="login-title">  <Plane size={28} style={{marginRight:"8px"}}/> Welcome back</h1>
+                    <h1 className="login-title">
+                        <Plane size={28} className="login-title-icon"/> Welcome back
+                    </h1>
                     <p className="login-subtitle">
                         Log in to plan your next trip with Sky Track.
                     </p>
