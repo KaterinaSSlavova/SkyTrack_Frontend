@@ -3,6 +3,7 @@ import api from "./apiClient";
 const url = "/auth";
 
 export async function login(data){
+   await api.get(`${url}/csrf`);
    const response = await api.post(`${url}/login`, data);
    return response.data;
 }
