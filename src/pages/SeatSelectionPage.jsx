@@ -25,25 +25,30 @@ export default function SeatSelectionPage() {
             .finally(() => setLoading(false));
     }, [dbFlightId]);
 
-    const handleConfirm = async () => {
-        if (!selectedSeat) return;
-        setSubmitting(true);
-        setError("");
-        try {
-            const amountInCents = Math.round(flight.price * 100);
-            const { clientSecret } = await createPaymentIntent(
-                amountInCents,
-                { passenger, flight, seatId: selectedSeat.id }
-            );
-            navigate("/payment", {
-                state: { clientSecret }
-            });
-        } catch {
-            setError("Failed to initiate payment. Please try again.");
-        } finally {
-            setSubmitting(false);
-        }
-    };
+   const handleConfirm = async () => {
+       if (!selectedSeat) return;
+       setSubmitting(true);
+       setError("");
+       try {
+           const { clientSecret, totalPrice } = await createPaymentIntent(
+               { passenger, flight, seatId: selectedSeat.id }
+           );
+
+           navigate("/payment", {
+               state: {
+                   clientSecret,
+                   flight,
+                   passenger,
+                   seat: selectedSeat,
+                   totalPrice
+               }
+           });
+       } catch {
+           setError("Failed to initiate payment. Please try again.");
+       } finally {
+           setSubmitting(false);
+       }
+   };
 
     if (!flight || !passenger) return <p>Missing booking data.</p>;
 
