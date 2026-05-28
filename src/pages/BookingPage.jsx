@@ -163,6 +163,7 @@ export default function BookingPage() {
                                 <input
                                     className="booking-input"
                                     name="firstName"
+                                    placeholder="John"
                                     value={passenger.firstName}
                                     onChange={handleChange}
                                     required
@@ -177,6 +178,7 @@ export default function BookingPage() {
                                 <input
                                     className="booking-input"
                                     name="lastName"
+                                    placeholder="Doe"
                                     value={passenger.lastName}
                                     onChange={handleChange}
                                     required
@@ -191,6 +193,7 @@ export default function BookingPage() {
                                 <input
                                     className="booking-input"
                                     type="email"
+                                    placeholder="john.doe@email.com"
                                     name="email"
                                     value={passenger.email}
                                     onChange={handleChange}
@@ -260,6 +263,7 @@ export default function BookingPage() {
                                 <input
                                     className="booking-input"
                                     name="nationality"
+                                    placeholder="Dutch"
                                     value={passenger.nationality}
                                     onChange={handleChange}
                                     required

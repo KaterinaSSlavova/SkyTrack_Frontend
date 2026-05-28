@@ -15,7 +15,7 @@ import MyBookingsPage from "./pages/MyBookingsPage";
 import BoardingPassPage from "./pages/BoardingPassPage"
 import FlightDetailsPage from "./pages/FlightDetailsPage";
 import { Elements } from '@stripe/react-stripe-js';
-import CheckoutForm from "./components/CheckoutForm";
+import CheckoutForm from "./pages/PaymentPage";
 
 function App() {
   return (
