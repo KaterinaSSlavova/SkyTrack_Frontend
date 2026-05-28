@@ -88,12 +88,6 @@ export default function PassengerHomePage() {
                 ) : (
                     <div className="no-flights-card">
                         <p>No upcoming flights yet.</p>
-                        <button
-                            className="search-flights-btn"
-                            onClick={() => navigate("/search")}
-                        >
-                            Search Flights
-                        </button>
                     </div>
                 )}
             </div>
