@@ -30,3 +30,13 @@ export async function verifyBooking(reference) {
    const response = await api.get(`${url}/verify/${reference}`);
    return response.data;
 }
+
+export async function getBookingStats() {
+    const response = await api.get(`${url}/statistics`);
+    return response.data;
+}
+
+export async function getNextFlight() {
+    const response = await api.get(`${url}/upcoming`);
+    return response.data;
+}
