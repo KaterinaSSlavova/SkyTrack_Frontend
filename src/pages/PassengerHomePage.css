@@ -2,37 +2,100 @@
     display: flex;
     min-height: 100vh;
     background-color: #f5f7fb;
+    padding-left: 240px;
+    box-sizing: border-box;
 }
 
 .passenger-content {
     flex: 1;
-    min-height: 100vh;
+    min-width: 0;
     padding: 32px 40px;
     box-sizing: border-box;
 }
 
-.passenger-card {
-    width: 100%;
-    max-width: 700px;
-    margin: 48px auto;
+.dashboard-greeting {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1a2b4a;
+    margin-bottom: 1rem;
+    max-width: 900px;
+}
+
+/* Stats */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 900px;
+}
+
+.stat-card {
     background: white;
-    padding: 48px;
-    border: 1px solid #d9dee7;
-    border-radius: 24px;
-    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
-    box-sizing: border-box;
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
     text-align: center;
 }
 
-.passenger-title {
-    font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    color: #0f172a;
+.stat-label {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 0.5rem;
 }
 
-.passenger-text {
-    font-size: 18px;
-    color: #475569;
-    margin: 0 0 10px 0;
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1a2b4a;
+}
+
+/* Next Flight */
+.next-flight-wrapper {
+    max-width: 900px;
+    width: 100%;
+}
+
+/* No flights */
+.no-flights-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    max-width: 900px;
+    text-align: center;
+    color: #64748b;
+}
+
+.search-flights-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background: #163d78;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.search-flights-btn:hover {
+    background: #1e4d99;
+}
+
+@media (max-width: 1024px) {
+    .passenger-page { padding-left: 180px; }
+    .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .passenger-page { padding-left: 88px; }
+    .dashboard-stats { grid-template-columns: repeat(2, 1fr); }
 }
