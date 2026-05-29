@@ -65,31 +65,31 @@ export default function BookingPage() {
         }));
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        try {
-            setLoading(true);
-            setError("");
+    try {
+        setLoading(true);
+        setError("");
 
-            await validatePassenger(passenger);
+        await validatePassenger(passenger, flight.departureLocalTime);
 
-            navigate("/booking/seats", {
-                state: {
-                    flight,
-                    passenger,
-                    dbFlightId,
-                },
-            });
-        } catch (err) {
-            setError(
-                err.response?.data?.message ||
-                "Passenger validation failed."
-            );
-        } finally {
-            setLoading(false);
-        }
-    };
+        navigate("/booking/seats", {
+            state: {
+                flight,
+                passenger,
+                dbFlightId,
+            },
+        });
+    } catch (err) {
+        setError(
+            err.response?.data?.message ||
+            "Passenger validation failed."
+        );
+    } finally {
+        setLoading(false);
+    }
+};
 
     if (!flight) {
         return <p>No flight selected.</p>;

@@ -81,6 +81,8 @@ export default function SeatSelectionPage() {
                             <span className="legend-item"><span className="legend-box available" />Available</span>
                             <span className="legend-item"><span className="legend-box unavailable" />Taken</span>
                             <span className="legend-item"><span className="legend-box selected" />Selected</span>
+                            <span className="legend-item"><span className="legend-box extra-legroom" />Extra Legroom +€25</span>
+                            <span className="legend-item"><span className="legend-box window" />Window +€10</span>
                         </div>
 
                         <div className="seat-map">
@@ -94,11 +96,13 @@ export default function SeatSelectionPage() {
                                                 className={`seat-btn
                                                     ${!seat.available ? "seat-unavailable" : ""}
                                                     ${selectedSeat?.id === seat.id ? "seat-selected" : ""}
-                                                    ${seat.available && selectedSeat?.id !== seat.id ? "seat-available" : ""}
+                                                    ${seat.available && selectedSeat?.id !== seat.id && seat.extraLegroom ? "seat-extra-legroom" : ""}
+                                                    ${seat.available && selectedSeat?.id !== seat.id && seat.window && !seat.extraLegroom ? "seat-window" : ""}
+                                                    ${seat.available && selectedSeat?.id !== seat.id && !seat.extraLegroom && !seat.window ? "seat-available" : ""}
                                                 `}
                                                 disabled={!seat.available}
                                                 onClick={() => setSelectedSeat(seat)}
-                                                title={`${seat.seatNumber}${seat.window ? " · Window" : ""}${seat.aisle ? " · Aisle" : ""}${seat.extraLegroom ? " · Extra legroom" : ""}`}
+                                                title={`${seat.seatNumber}${seat.window ? " · Window +€10" : ""}${seat.aisle ? " · Aisle" : ""}${seat.extraLegroom ? " · Extra legroom +€25" : ""}`}
                                             >
                                                 {seat.seatNumber}
                                             </button>
