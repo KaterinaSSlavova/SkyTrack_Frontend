@@ -174,3 +174,26 @@
 
     .seat-title { font-size: 36px; }
 }
+
+.seat-extra-legroom {
+    background-color: #fef9c3;
+    color: #854d0e;
+    border: 1px solid #fde047;
+}
+
+.seat-extra-legroom:hover {
+    background-color: #fef08a;
+}
+
+.legend-box.extra-legroom { background-color: #fef9c3; border: 1px solid #fde047; }
+.legend-box.window { background-color: #dcfce7; border: 1px solid #86efac; }
+
+.seat-window {
+    background-color: #dcfce7;
+    color: #166534;
+    border: 1px solid #86efac;
+}
+
+.seat-window:hover {
+    background-color: #bbf7d0;
+}

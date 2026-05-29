@@ -74,6 +74,20 @@ export default function PaymentPage() {
                             <span>€{flight?.price}</span>
                         </div>
 
+                        {seat?.extraLegroom && (
+                            <div className="summary-row">
+                                <span>Extra Legroom</span>
+                                <span>+€25.00</span>
+                            </div>
+                        )}
+
+                        {seat?.window && (
+                            <div className="summary-row">
+                                <span>Window Seat</span>
+                                <span>+€10.00</span>
+                            </div>
+                        )}
+
                         <hr className="summary-divider" />
 
                         <div className="summary-row summary-total">
