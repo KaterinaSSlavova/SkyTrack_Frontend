@@ -123,13 +123,9 @@ const handleSubmit = async (e) => {
                         <p className="booking-summary-detail">
                             {flight.flightNumber}
                             {" · "}
-                            {formatTime(
-                                flight.departureLocalTime
-                            )}
+                            {formatTime(flight.departureLocalTime)}
                             {" – "}
-                            {formatTime(
-                                flight.arrivalLocalTime
-                            )}
+                            {formatTime(flight.arrivalLocalTime)}
                         </p>
                     </div>
 

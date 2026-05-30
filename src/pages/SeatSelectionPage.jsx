@@ -6,6 +6,9 @@ import Sidebar from '../components/Sidebar';
 import Topbar from "../components/Topbar";
 import "./SeatSelectionPage.css";
 
+const LEFT_SEATS  = ["A", "B", "C"];
+const RIGHT_SEATS = ["D", "E", "F"];
+
 export default function SeatSelectionPage() {
     const { state } = useLocation();
     const navigate = useNavigate();
@@ -25,30 +28,23 @@ export default function SeatSelectionPage() {
             .finally(() => setLoading(false));
     }, [dbFlightId]);
 
-   const handleConfirm = async () => {
-       if (!selectedSeat) return;
-       setSubmitting(true);
-       setError("");
-       try {
-           const { clientSecret, totalPrice } = await createPaymentIntent(
-               { passenger, flight, seatId: selectedSeat.id }
-           );
-
-           navigate("/payment", {
-               state: {
-                   clientSecret,
-                   flight,
-                   passenger,
-                   seat: selectedSeat,
-                   totalPrice
-               }
-           });
-       } catch {
-           setError("Failed to initiate payment. Please try again.");
-       } finally {
-           setSubmitting(false);
-       }
-   };
+    const handleConfirm = async () => {
+        if (!selectedSeat) return;
+        setSubmitting(true);
+        setError("");
+        try {
+            const { clientSecret, totalPrice } = await createPaymentIntent(
+                { passenger, flight, seatId: selectedSeat.id }
+            );
+            navigate("/payment", {
+                state: { clientSecret, flight, passenger, seat: selectedSeat, totalPrice }
+            });
+        } catch {
+            setError("Failed to initiate payment. Please try again.");
+        } finally {
+            setSubmitting(false);
+        }
+    };
 
     if (!flight || !passenger) return <p>Missing booking data.</p>;
 
@@ -58,6 +54,26 @@ export default function SeatSelectionPage() {
         acc[row].push(seat);
         return acc;
     }, {});
+
+    const getSeatClass = (seat) => {
+        if (!seat.available)                                          return "seat-btn seat-unavailable";
+        if (selectedSeat?.id === seat.id)                            return "seat-btn seat-selected";
+        if (seat.extraLegroom)                                       return "seat-btn seat-extra-legroom";
+        if (seat.window)                                             return "seat-btn seat-window";
+        return "seat-btn seat-available";
+    };
+
+    const renderSeat = (seat) => (
+        <button
+            key={seat.id}
+            className={getSeatClass(seat)}
+            disabled={!seat.available}
+            onClick={() => setSelectedSeat(seat)}
+            title={`${seat.seatNumber}${seat.window ? " · Window +€10" : ""}${seat.aisle ? " · Aisle" : ""}${seat.extraLegroom ? " · Extra legroom +€25" : ""}`}
+        >
+            {seat.seatNumber}
+        </button>
+    );
 
     return (
         <div className="seat-page">
@@ -86,30 +102,27 @@ export default function SeatSelectionPage() {
                         </div>
 
                         <div className="seat-map">
-                            {Object.entries(rows).map(([row, rowSeats]) => (
-                                <div key={row} className="seat-row">
-                                    <span className="seat-row-label">{row}</span>
-                                    <div className="seat-row-seats">
-                                        {rowSeats.map(seat => (
-                                            <button
-                                                key={seat.id}
-                                                className={`seat-btn
-                                                    ${!seat.available ? "seat-unavailable" : ""}
-                                                    ${selectedSeat?.id === seat.id ? "seat-selected" : ""}
-                                                    ${seat.available && selectedSeat?.id !== seat.id && seat.extraLegroom ? "seat-extra-legroom" : ""}
-                                                    ${seat.available && selectedSeat?.id !== seat.id && seat.window && !seat.extraLegroom ? "seat-window" : ""}
-                                                    ${seat.available && selectedSeat?.id !== seat.id && !seat.extraLegroom && !seat.window ? "seat-available" : ""}
-                                                `}
-                                                disabled={!seat.available}
-                                                onClick={() => setSelectedSeat(seat)}
-                                                title={`${seat.seatNumber}${seat.window ? " · Window +€10" : ""}${seat.aisle ? " · Aisle" : ""}${seat.extraLegroom ? " · Extra legroom +€25" : ""}`}
-                                            >
-                                                {seat.seatNumber}
-                                            </button>
-                                        ))}
+                            <div className="seat-map-header">
+                                <span className="seat-map-header-label">A B C</span>
+                                <span className="seat-map-header-aisle"></span>
+                                <span className="seat-map-header-label">D E F</span>
+                            </div>
+
+                            {Object.entries(rows).map(([row, rowSeats]) => {
+                                const left  = rowSeats.filter(s => LEFT_SEATS.includes(s.seatNumber.slice(-1)));
+                                const right = rowSeats.filter(s => RIGHT_SEATS.includes(s.seatNumber.slice(-1)));
+
+                                return (
+                                    <div key={row} className="seat-row">
+                                        <span className="seat-row-label">{row}</span>
+                                        <div className="seat-row-seats">
+                                            <div className="seat-group">{left.map(renderSeat)}</div>
+                                            <div className="seat-aisle" />
+                                            <div className="seat-group">{right.map(renderSeat)}</div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
+                                );
+                            })}
                         </div>
 
                         {selectedSeat && (
