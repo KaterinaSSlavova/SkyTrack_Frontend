@@ -5,6 +5,7 @@ import CheckoutForm from "../components/CheckoutForm";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import "./PaymentPage.css";
+import { useEffect } from "react";
 
 const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
@@ -21,6 +22,10 @@ export default function PaymentPage() {
     const navigate = useNavigate();
 
     const { clientSecret, flight, passenger, seat, totalPrice } = state || {};
+
+      useEffect(() => {
+            window.scrollTo({ top: 0, behavior: "instant" });
+        }, []);
 
     if (!clientSecret) return <p>No payment data found.</p>;
 

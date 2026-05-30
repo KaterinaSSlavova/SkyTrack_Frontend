@@ -48,20 +48,22 @@ export default function BookingCard({ booking, qrCodes, highlight, onCancelled }
         <div className={`booking-card ${highlight ? "booking-card-highlight" : ""}`}>
             {highlight && <div className="booking-card-badge">Next Trip ✈</div>}
 
-            <div className="booking-card-top" onClick={() => setExpanded(!expanded)}>
-                <div>
-                    <p className="booking-card-route">
-                        {booking.flight?.departureIataCode} → {booking.flight?.arrivalIataCode}
-                    </p>
-                    <p className="booking-card-detail">
-                        {booking.flight?.flightNumber} · {formatDate(booking.flight?.departureLocalTime)} · {formatTime(booking.flight?.departureLocalTime)} – {formatTime(booking.flight?.arrivalLocalTime)}
-                    </p>
-                </div>
-                <div className="booking-card-right">
-                    <p className="booking-card-price">€{booking.totalPrice}</p>
-                    <p className="booking-card-ref">Ref: {booking.bookingReference}</p>
-                </div>
-            </div>
+          <div className="booking-card-top" onClick={() => setExpanded(!expanded)}>
+              <div>
+                  <p className="booking-card-route">
+                      {booking.flight?.departureIataCode} → {booking.flight?.arrivalIataCode}
+                  </p>
+                  <p className="booking-card-detail">
+                      {booking.flight?.flightNumber} · {formatDate(booking.flight?.departureLocalTime)} · {formatTime(booking.flight?.departureLocalTime)} – {formatTime(booking.flight?.arrivalLocalTime)}
+                      {booking.flight?.gate ? ` · Gate ${booking.flight.gate}` : ""}
+                  </p>
+              </div>
+              <div className="booking-card-right">
+                  <p className="booking-card-price">€{booking.totalPrice}</p>
+                  <p className="booking-card-ref">Ref: {booking.bookingReference}</p>
+                  <span className="booking-card-chevron">{expanded ? "▲ Hide boarding pass" : "▼ View boarding pass"}</span>
+              </div>
+          </div>
 
             <div className="booking-card-details-row">
                 <div className="booking-detail-box">

@@ -197,3 +197,39 @@
 .seat-window:hover {
     background-color: #bbf7d0;
 }
+
+.seat-row-seats {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.seat-group {
+    display: flex;
+    gap: 8px;
+}
+
+.seat-aisle {
+    width: 40px;
+    flex-shrink: 0;
+}
+
+.seat-map-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-left: 40px;
+}
+
+.seat-map-header-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #94a3b8;
+    letter-spacing: 8px;
+    width: calc(3 * 48px + 2 * 8px);
+}
+
+.seat-map-header-aisle {
+    width: 40px;
+    flex-shrink: 0;
+}
