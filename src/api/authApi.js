@@ -9,6 +9,7 @@ export async function login(data){
 }
 
 export async function register(data){
+    await api.get(`${url}/csrf`);
     const response = await api.post(`${url}/register`, data);
     return response.data;
 }
