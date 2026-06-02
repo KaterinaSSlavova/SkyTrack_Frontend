@@ -2,7 +2,13 @@ describe('Register', () => {
   it('registers as passenger and redirects to login page', () => {
     const uniqueEmail = `gabe+${Date.now()}@gmail.com`;
     cy.on("uncaught:exception", () => false);
-    cy.request('GET', 'http://localhost:8080/auth/csrf');
+    const apiBaseUrl = Cypress.env("apiUrl");
+
+    cy.request({
+      method: "GET",
+      url: `${Cypress.env("apiUrl")}/auth/csrf`,
+    });
+
     cy.visit('/auth/register');
     cy.get('input[name="firstName"]').type("Gabriel");
     cy.get('input[name="lastName"]').type("Yordanov");
