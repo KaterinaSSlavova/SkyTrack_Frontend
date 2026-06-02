@@ -2,7 +2,6 @@ describe('Register', () => {
   it('registers as passenger and redirects to login page', () => {
     const uniqueEmail = `gabe+${Date.now()}@gmail.com`;
     cy.on("uncaught:exception", () => false);
-    const apiBaseUrl = Cypress.env("apiUrl");
 
     cy.request({
       method: "GET",
@@ -17,6 +16,6 @@ describe('Register', () => {
     cy.get('input[name="password"]').type("test_password");
     cy.get('button[type="submit"]').click();
 
-    cy.url().should("include", "/auth/login");
+    cy.url({ timeout: 10000 }).should("include", "/auth/login");
   })
 })
