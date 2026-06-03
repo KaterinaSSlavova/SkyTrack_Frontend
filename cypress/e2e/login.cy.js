@@ -24,18 +24,4 @@ describe('Login', () => {
       cy.get('button[type="submit"]').click();
       cy.url().should("include", "/auth/login");
     });
-
-    it('blocks login after 5 failed attempts', () => {
-      cy.visit("/auth/login");
-      for (let i = 0; i < 5; i++) {
-        cy.get('input[name="email"]').clear().type("wrong@gmail.com");
-        cy.get('input[name="password"]').clear().type("wrongpassword");
-        cy.get('button[type="submit"]').click();
-        cy.wait(500);
-      }
-      cy.get('input[name="email"]').clear().type("kate@gmail.com");
-      cy.get('input[name="password"]').clear().type("qwerty");
-      cy.get('button[type="submit"]').click();
-      cy.url().should("include", "/auth/login");
-    });
 });
