@@ -50,13 +50,14 @@ describe("Search Flights", () => {
     cy.get(".search-dropdown-item").should("not.exist");
   });
 
-  it("selects airports and searches for flights", () => {
+it("selects airports and searches for flights", () => {
     cy.get("#departure").type("AMS");
     cy.get(".search-dropdown-item").first().click();
 
     cy.get("#arrival").type("JFK");
     cy.get(".search-dropdown-item").should("have.length.greaterThan", 0);
     cy.get(".search-dropdown-item").first().click();
+    cy.get(".search-dropdown-item").should("not.exist");
 
     cy.get("#departure-date").clear().type("2026-08-01");
 
@@ -69,5 +70,5 @@ describe("Search Flights", () => {
       .should("eq", 200);
 
     cy.get(".flight-results", { timeout: 30000 }).should("be.visible");
-  });
+});
 });
