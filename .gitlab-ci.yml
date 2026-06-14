@@ -1,6 +1,7 @@
 stages:
   - lint
   - build
+  - test
   - package
   - trigger_deploy
 
@@ -15,6 +16,12 @@ build:
   script:
     - pnpm install --frozen-lockfile
     - pnpm build
+
+test:
+  stage: test
+  script:
+    - pnpm install --frozen-lockfile
+    - pnpm test --run
 
 package:
   stage: package
