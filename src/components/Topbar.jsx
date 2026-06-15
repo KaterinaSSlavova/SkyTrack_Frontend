@@ -1,15 +1,22 @@
-import { Bell } from "lucide-react";
+import { Bell, MapPinned } from "lucide-react";
 import { useUser } from "../context/UserContext";
 import { useEffect, useRef, useState } from "react";
 import { getAllNotifications, markNotificationAsRead, markAllNotificationsAsRead } from "../api/notificationApi";
 import { getNotification, disconnectNotificationSocket } from "../api/notificationSocket";
+import { getTravelSuggestions, markCountryAsVisited } from "../api/mapApi";
 import "./Topbar.css";
 
 export default function Topbar({ onProfileClick }) {
     const { user, loadingUser } = useUser();
+
     const [open, setOpen] = useState(false);
     const [notifications, setNotifications] = useState([]);
+
+    const [suggestionsOpen, setSuggestionsOpen] = useState(false);
+    const [suggestions, setSuggestions] = useState([]);
+
     const dropdownRef = useRef(null);
+    const suggestionsRef = useRef(null);
 
     async function loadNotifications() {
         try {
@@ -20,28 +27,39 @@ export default function Topbar({ onProfileClick }) {
         }
     }
 
+    async function loadSuggestions() {
+        try {
+            const data = await getTravelSuggestions();
+            setSuggestions(Array.isArray(data) ? data : []);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     useEffect(() => {
         if (!user) return;
 
-      function connectSocket() {
-        disconnectNotificationSocket();
+        function connectSocket() {
+            disconnectNotificationSocket();
 
-        getNotification((notification) => {
-            setNotifications((prev) => [notification, ...prev]);
-        });
-      }
+            getNotification((notification) => {
+                setNotifications((prev) => [notification, ...prev]);
+            });
+        }
 
-       loadNotifications();
-       connectSocket();
+        async function refreshTopbarData() {
+            await loadNotifications();
+            await loadSuggestions();
+            connectSocket();
+        }
 
-       window.addEventListener("auth-refreshed", async () => {
-           await loadNotifications();
-           connectSocket();
-       });
+        refreshTopbarData();
+
+        window.addEventListener("auth-refreshed", refreshTopbarData);
 
         return () => {
-           window.removeEventListener("auth-refreshed", connectSocket);
-           disconnectNotificationSocket();
+            window.removeEventListener("auth-refreshed", refreshTopbarData);
+            disconnectNotificationSocket();
         };
     }, [user]);
 
@@ -50,7 +68,12 @@ export default function Topbar({ onProfileClick }) {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
                 setOpen(false);
             }
+
+            if (suggestionsRef.current && !suggestionsRef.current.contains(e.target)) {
+                setSuggestionsOpen(false);
+            }
         }
+
         document.addEventListener("mousedown", handleClickOutside);
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
@@ -70,6 +93,15 @@ export default function Topbar({ onProfileClick }) {
         try {
             await markAllNotificationsAsRead();
             setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    async function handleAddSuggestion(countryCode) {
+        try {
+            await markCountryAsVisited(countryCode);
+            await loadSuggestions();
         } catch (err) {
             console.error(err);
         }
@@ -130,6 +162,52 @@ export default function Topbar({ onProfileClick }) {
                                                     })}
                                                 </p>
                                             )}
+                                        </div>
+                                    </div>
+                                ))
+                            )}
+                        </div>
+                    </div>
+                )}
+            </div>
+
+            <div className="notification-wrapper" ref={suggestionsRef}>
+                <button
+                    className="notification-btn"
+                    type="button"
+                    onClick={() => setSuggestionsOpen((prev) => !prev)}
+                >
+                    <MapPinned size={20} />
+                    {suggestions.length > 0 && (
+                        <span className="notification-badge">
+                            {suggestions.length > 99 ? "99+" : suggestions.length}
+                        </span>
+                    )}
+                </button>
+
+                {suggestionsOpen && (
+                    <div className="notification-dropdown">
+                        <div className="notification-dropdown-header">
+                            <span className="notification-dropdown-title">Travel Suggestions</span>
+                        </div>
+
+                        <div className="notification-list">
+                            {suggestions.length === 0 ? (
+                                <p className="notification-empty">No travel suggestions.</p>
+                            ) : (
+                                suggestions.map((country) => (
+                                    <div key={country.countryCode} className="notification-item">
+                                        <div className="notification-body">
+                                            <p className="notification-title">{country.countryName}</p>
+                                            <p className="notification-message">
+                                                Add this country to your travel map.
+                                            </p>
+                                            <button
+                                                className="mark-all-btn"
+                                                onClick={() => handleAddSuggestion(country.countryCode)}
+                                            >
+                                                Add to map
+                                            </button>
                                         </div>
                                     </div>
                                 ))

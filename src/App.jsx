@@ -16,6 +16,7 @@ import BoardingPassPage from "./pages/BoardingPassPage"
 import FlightDetailsPage from "./pages/FlightDetailsPage";
 import { Elements } from '@stripe/react-stripe-js';
 import CheckoutForm from "./pages/PaymentPage";
+import TravelMapPage from "./pages/TravelMapPage";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
             <Route path="/booking/seats" element={<SeatSelectionPage />} />
             <Route path="/bookings" element={<MyBookingsPage />} />
             <Route path="/boarding-pass/:reference" element={<BoardingPassPage />} />
+            <Route path="/travel-map" element={<TravelMapPage />} />
             <Route path="/payment" element={<CheckoutForm />} />
        </Routes>
       </UserProvider>

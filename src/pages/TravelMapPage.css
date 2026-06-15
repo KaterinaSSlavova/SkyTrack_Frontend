@@ -1,0 +1,92 @@
+.travel-layout {
+    display: flex;
+    min-height: 100vh;
+    background: #f5f7fb;
+}
+
+.travel-main {
+    flex: 1;
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+.travel-map-page {
+    padding: 40px 56px;
+}
+
+.travel-map-header {
+    margin-bottom: 24px;
+}
+
+.travel-map-header h1 {
+    font-size: 44px;
+    margin: 0;
+    color: #0f172a;
+}
+
+.travel-map-header p {
+    margin-top: 6px;
+    color: #64748b;
+    font-size: 18px;
+}
+
+.travel-map-card {
+    background: white;
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+}
+
+.country {
+    fill: #e5e7eb;
+    stroke: white;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.country:hover {
+    fill: #93c5fd;
+    outline: none;
+}
+
+.country.visited {
+    fill: #17447f;
+}
+
+.country.suggested {
+    fill: #fbbf24;
+}
+
+.travel-map-legend {
+    display: flex;
+    gap: 20px;
+    margin-top: 18px;
+    color: #334155;
+    font-size: 14px;
+}
+
+.legend-box {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+}
+
+.visited-box {
+    background: #17447f;
+}
+
+.suggested-box {
+    background: #fbbf24;
+}
+
+.default-box {
+    background: #e5e7eb;
+}
+
+.travel-map-loading {
+    color: #64748b;
+}
