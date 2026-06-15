@@ -56,6 +56,10 @@ export default function Sidebar() {
                         <Link to="/bookings" className="sidebar-item">
                             Bookings
                         </Link>
+
+                        <Link to="/travel-map" className="sidebar-item">
+                            Travel Map
+                        </Link>
                     </>
                 )}
 
